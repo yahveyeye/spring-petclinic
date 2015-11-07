@@ -18,12 +18,10 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.zymb.gxyhxx.reservation.config.BusinessConfig;
 import com.zymb.gxyhxx.reservation.config.MvcCoreConfig;
 import com.zymb.gxyhxx.reservation.config.ToolsConfig;
-import com.zymb.gxyhxx.reservation.web.VetController;
 
 /**
  * Test class for the UserResource REST controller.
@@ -34,16 +32,16 @@ import com.zymb.gxyhxx.reservation.web.VetController;
         @ContextConfiguration(classes = { BusinessConfig.class, ToolsConfig.class }),
         @ContextConfiguration(classes = MvcCoreConfig.class)})
 @ActiveProfiles("spring-data-jpa")
-public class VetControllerTests {
+public class ReservationControllerTests {
 
     @Autowired
-    private VetController vetController;
+    private ReservationController reservationController;
 
     private MockMvc mockMvc;
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(vetController).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(reservationController).build();
     }
 
     @Test

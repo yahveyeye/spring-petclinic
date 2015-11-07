@@ -20,11 +20,7 @@ import java.util.Collection;
 import org.springframework.dao.DataAccessException;
 
 import com.zymb.gxyhxx.reservation.model.Owner;
-import com.zymb.gxyhxx.reservation.model.Pet;
-import com.zymb.gxyhxx.reservation.model.PetType;
 import com.zymb.gxyhxx.reservation.model.Reservation;
-import com.zymb.gxyhxx.reservation.model.Vet;
-import com.zymb.gxyhxx.reservation.model.Visit;
 
 
 /**
@@ -34,20 +30,8 @@ import com.zymb.gxyhxx.reservation.model.Visit;
  */
 public interface ClinicService {
 
-    Collection<PetType> findPetTypes() throws DataAccessException;
-
     Owner findOwnerById(int id) throws DataAccessException;
-
-    Pet findPetById(int id) throws DataAccessException;
-
-    void savePet(Pet pet) throws DataAccessException;
-
-    void saveVisit(Visit visit) throws DataAccessException;
-
-    Collection<Vet> findVets() throws DataAccessException;
-
     void saveOwner(Owner owner) throws DataAccessException;
-
     Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException;
 
 	void saveReservation(Reservation reservation);

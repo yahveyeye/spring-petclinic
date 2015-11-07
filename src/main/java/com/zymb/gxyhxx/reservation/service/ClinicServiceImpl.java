@@ -18,21 +18,14 @@ package com.zymb.gxyhxx.reservation.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zymb.gxyhxx.reservation.model.Owner;
-import com.zymb.gxyhxx.reservation.model.Pet;
-import com.zymb.gxyhxx.reservation.model.PetType;
 import com.zymb.gxyhxx.reservation.model.Reservation;
-import com.zymb.gxyhxx.reservation.model.Vet;
-import com.zymb.gxyhxx.reservation.model.Visit;
 import com.zymb.gxyhxx.reservation.repository.OwnerRepository;
-import com.zymb.gxyhxx.reservation.repository.PetRepository;
-import com.zymb.gxyhxx.reservation.repository.VetRepository;
-import com.zymb.gxyhxx.reservation.repository.VisitRepository;
+import com.zymb.gxyhxx.reservation.repository.ReservationRepository;
 
 /**
  * Mostly used as a facade for all Petclinic controllers
@@ -43,24 +36,17 @@ import com.zymb.gxyhxx.reservation.repository.VisitRepository;
 @Service
 public class ClinicServiceImpl implements ClinicService {
 
-    private PetRepository petRepository;
-    private VetRepository vetRepository;
+  
     private OwnerRepository ownerRepository;
-    private VisitRepository visitRepository;
+    private ReservationRepository reservationRepository;
 
     @Autowired
-    public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository, VisitRepository visitRepository) {
-        this.petRepository = petRepository;
-        this.vetRepository = vetRepository;
-        this.ownerRepository = ownerRepository;
-        this.visitRepository = visitRepository;
+    public ClinicServiceImpl(OwnerRepository ownerRepository, ReservationRepository reservationRepository) {
+    	super();
+    	this.ownerRepository = ownerRepository;
+    	this.reservationRepository = reservationRepository;
     }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Collection<PetType> findPetTypes() throws DataAccessException {
-        return petRepository.findPetTypes();
-    }
+  
 
     @Override
     @Transactional(readOnly = true)
@@ -68,7 +54,8 @@ public class ClinicServiceImpl implements ClinicService {
         return ownerRepository.findById(id);
     }
 
-    @Override
+
+	@Override
     @Transactional(readOnly = true)
     public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
         return ownerRepository.findByLastName(lastName);
@@ -81,48 +68,21 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
 
-    @Override
-    @Transactional
-    public void saveVisit(Visit visit) throws DataAccessException {
-        visitRepository.save(visit);
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public Pet findPetById(int id) throws DataAccessException {
-        return petRepository.findById(id);
-    }
-
-    @Override
-    @Transactional
-    public void savePet(Pet pet) throws DataAccessException {
-        petRepository.save(pet);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    @Cacheable(value = "vets")
-    public Collection<Vet> findVets() throws DataAccessException {
-        return vetRepository.findAll();
-    }
+ 
 
 	@Override
 	public void saveReservation(Reservation reservation) {
-		// TODO Auto-generated method stub
-		
+		reservationRepository.save(reservation);
 	}
 
 	@Override
 	public Collection<Reservation> findReservationByLastName(String lastName) {
-		// TODO Auto-generated method stub
-		return null;
+		return	reservationRepository.findByLastName(lastName);
 	}
 
 	@Override
 	public Reservation findReservationById(int reservationId) {
-		// TODO Auto-generated method stub
-		return null;
+		return reservationRepository.findById(reservationId);
 	}
 
 

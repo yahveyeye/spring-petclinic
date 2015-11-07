@@ -51,7 +51,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import com.zymb.gxyhxx.reservation.service.ClinicService;
-import com.zymb.gxyhxx.reservation.web.PetTypeFormatter;
 
 /**
  * <p>
@@ -90,15 +89,6 @@ public class MvcCoreConfig extends WebMvcConfigurerAdapter {
 		configurer.enable();
 	}
 
-	@Override
-	public void addFormatters(FormatterRegistry formatterRegistry) {
-		formatterRegistry.addFormatter(petTypeFormatter());
-	}
-
-	@Bean
-	public PetTypeFormatter petTypeFormatter() {
-		return new PetTypeFormatter(clinicService);
-	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
