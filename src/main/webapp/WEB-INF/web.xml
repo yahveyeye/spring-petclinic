@@ -12,7 +12,7 @@
   </context-param>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>org.springframework.samples.petclinic.config.RootApplicationContextConfig</param-value>
+    <param-value>com.zymb.gxyhxx.reservation.config.RootApplicationContextConfig</param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -26,7 +26,7 @@
     </init-param>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>org.springframework.samples.petclinic.config.MvcCoreConfig</param-value>
+      <param-value>com.zymb.gxyhxx.reservation.config.MvcCoreConfig</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
