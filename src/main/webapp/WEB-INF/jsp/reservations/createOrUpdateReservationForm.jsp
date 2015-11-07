@@ -16,14 +16,14 @@
 <div class="container">
     <jsp:include page="../fragments/bodyHeader.jsp"/>
     <c:choose>
-        <c:when test="${owner['new']}"><c:set var="method" value="post"/></c:when>
+        <c:when test="${reservation['new']}"><c:set var="method" value="post"/></c:when>
         <c:otherwise><c:set var="method" value="put"/></c:otherwise>
     </c:choose>
 
     <h2>
-        <c:if test="${owner['new']}">新</c:if>预约
+        <c:if test="${reservation['new']}">新</c:if>预约
     </h2>
-    <form:form modelAttribute="owner" method="${method}" class="form-horizontal" id="add-owner-form">
+    <form:form modelAttribute="reservation" method="${method}" class="form-horizontal" id="add-reservation-form">
         <petclinic:inputField label="First Name" name="firstName"/>
         <petclinic:inputField label="Last Name" name="lastName"/>
         <petclinic:inputField label="Address" name="address"/>
@@ -32,7 +32,7 @@
 
         <div class="form-actions">
             <c:choose>
-                <c:when test="${owner['new']}">
+                <c:when test="${reservation['new']}">
                     <button type="submit">创建</button>
                 </c:when>
                 <c:otherwise>

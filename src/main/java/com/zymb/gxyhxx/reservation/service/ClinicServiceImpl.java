@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zymb.gxyhxx.reservation.model.Owner;
 import com.zymb.gxyhxx.reservation.model.Pet;
 import com.zymb.gxyhxx.reservation.model.PetType;
+import com.zymb.gxyhxx.reservation.model.Reservation;
 import com.zymb.gxyhxx.reservation.model.Vet;
 import com.zymb.gxyhxx.reservation.model.Visit;
 import com.zymb.gxyhxx.reservation.repository.OwnerRepository;
@@ -105,6 +106,24 @@ public class ClinicServiceImpl implements ClinicService {
     public Collection<Vet> findVets() throws DataAccessException {
         return vetRepository.findAll();
     }
+
+	@Override
+	public void saveReservation(Reservation reservation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Collection<Reservation> findReservationByLastName(String lastName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Reservation findReservationById(int reservationId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

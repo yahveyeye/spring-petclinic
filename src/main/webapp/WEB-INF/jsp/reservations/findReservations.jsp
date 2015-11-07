@@ -15,9 +15,9 @@
 
     <h2>查询</h2>
 
-    <spring:url value="/owners.html" var="formUrl"/>
-    <form:form modelAttribute="owner" action="${fn:escapeXml(formUrl)}" method="get" class="form-horizontal"
-               id="search-owner-form">
+    <spring:url value="/reservations.html" var="formUrl"/>
+    <form:form modelAttribute="reservation" action="${fn:escapeXml(formUrl)}" method="get" class="form-horizontal"
+               id="search-reservation-form">
         <fieldset>
             <div class="control-group" id="lastName">
                 <label class="control-label">身份证号码 </label>
@@ -31,7 +31,7 @@
     </form:form>
 
     <br/>
-   <%--  <a href='<spring:url value="/owners/new" htmlEscape="true"/>'>Add Owner</a> --%>
+   <%--  <a href='<spring:url value="/reservations/new" htmlEscape="true"/>'>Add Owner</a> --%>
 
     <jsp:include page="../fragments/footer.jsp"/>
 
