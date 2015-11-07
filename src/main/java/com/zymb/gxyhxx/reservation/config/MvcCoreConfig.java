@@ -122,6 +122,7 @@ public class MvcCoreConfig extends WebMvcConfigurerAdapter {
 	public ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource() {
 		// Files are stored inside src/main/resources
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setDefaultEncoding("utf-8");
 		messageSource.setBasenames("classpath:messages/messages");
 		return messageSource;
 	}
