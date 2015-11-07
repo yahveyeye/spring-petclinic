@@ -30,6 +30,8 @@
  */
 package com.zymb.gxyhxx.reservation.config;
 
+import java.util.Properties;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -61,6 +63,9 @@ public class SharedJpaConfig {
         em.setDataSource(dataSource);
         // gDickens: BOTH Persistence Unit and Packages to Scan are NOT compatible, persistenceUnit will win
         em.setPersistenceUnitName("petclinic");
+        Properties jpaProperties = new Properties();
+        jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		em.setJpaProperties(jpaProperties);
         em.setPackagesToScan("com.zymb.gxyhxx.reservation");
         em.setJpaVendorAdapter(jpaVendorAdaper());
         em.afterPropertiesSet();
