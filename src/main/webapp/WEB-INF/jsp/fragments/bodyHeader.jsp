@@ -9,9 +9,9 @@
         <ul class="nav">
             <li style="width: 120px;"><a href="<spring:url value="/" htmlEscape="true" />"><i class="icon-home"></i>
                 首页</a></li>
-            <li style="width: 150px;"><a href="<spring:url value="/owners/new" htmlEscape="true" />"><i
+            <li style="width: 150px;"><a href="<spring:url value="/reservations/new" htmlEscape="true" />"><i
                     class="icon-search"></i> 预约</a></li>
-            <li style="width: 150px;"><a href="<spring:url value="/owners/find.html" htmlEscape="true" />"><i
+            <li style="width: 150px;"><a href="<spring:url value="/reservations/find.html" htmlEscape="true" />"><i
                     class="icon-search"></i> 查询</a></li>
           <%--   <li style="width: 160px;"><a href="<spring:url value="/vets.html" htmlEscape="true" />"><i
                     class="icon-th-list"></i> Veterinarians</a></li>

@@ -55,7 +55,7 @@ public class JpaReservationRepositoryImpl implements ReservationRepository {
     public Collection<Reservation> findByLastName(String lastName) {
         // using 'join fetch' because a single query should load both reservations and pets
         // using 'left join fetch' because it might happen that an reservation does not have pets yet
-        Query query = this.em.createQuery("SELECT DISTINCT reservation FROM Reservation reservation left join fetch reservation.pets WHERE reservation.lastName LIKE :lastName");
+        Query query = this.em.createQuery("SELECT DISTINCT reservation FROM Reservation reservation  WHERE reservation.lastName LIKE :lastName");
         query.setParameter("lastName", lastName + "%");
         return query.getResultList();
     }
@@ -64,7 +64,7 @@ public class JpaReservationRepositoryImpl implements ReservationRepository {
     public Reservation findById(int id) {
         // using 'join fetch' because a single query should load both reservations and pets
         // using 'left join fetch' because it might happen that an reservation does not have pets yet
-        Query query = this.em.createQuery("SELECT reservation FROM Reservation reservation left join fetch reservation.pets WHERE reservation.id =:id");
+        Query query = this.em.createQuery("SELECT reservation FROM Reservation reservation  WHERE reservation.id =:id");
         query.setParameter("id", id);
         return (Reservation) query.getSingleResult();
     }
