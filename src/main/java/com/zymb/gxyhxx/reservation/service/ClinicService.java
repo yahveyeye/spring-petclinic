@@ -17,9 +17,6 @@ package com.zymb.gxyhxx.reservation.service;
 
 import java.util.Collection;
 
-import org.springframework.dao.DataAccessException;
-
-import com.zymb.gxyhxx.reservation.model.Owner;
 import com.zymb.gxyhxx.reservation.model.Reservation;
 
 
@@ -29,10 +26,6 @@ import com.zymb.gxyhxx.reservation.model.Reservation;
  * @author Michael Isvy
  */
 public interface ClinicService {
-
-    Owner findOwnerById(int id) throws DataAccessException;
-    void saveOwner(Owner owner) throws DataAccessException;
-    Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException;
 
 	void saveReservation(Reservation reservation);
 

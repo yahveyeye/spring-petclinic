@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zymb.gxyhxx.reservation.model.Owner;
+import com.zymb.gxyhxx.reservation.model.Reservation;
 
 /**
  * <p> Base class for {@link ClinicService} integration tests. </p> <p> Subclasses should specify Spring context
@@ -51,46 +51,46 @@ public abstract class AbstractClinicServiceTests {
     protected ClinicService clinicService;
 
     @Test
-    public void shouldFindOwnersByLastName() {
-        Collection<Owner> owners = this.clinicService.findOwnerByLastName("Davis");
-        assertThat(owners.size()).isEqualTo(2);
+    public void shouldFindReservationsByLastName() {
+        Collection<Reservation> reservations = this.clinicService.findReservationByLastName("Davis");
+        assertThat(reservations.size()).isEqualTo(2);
 
-        owners = this.clinicService.findOwnerByLastName("Daviss");
-        assertThat(owners.isEmpty());
+        reservations = this.clinicService.findReservationByLastName("Daviss");
+        assertThat(reservations.isEmpty());
     }
 
     @Test
     @Transactional
-    public void shouldInsertOwner() {
-        Collection<Owner> owners = this.clinicService.findOwnerByLastName("Schultz");
-        int found = owners.size();
+    public void shouldInsertReservation() {
+        Collection<Reservation> reservations = this.clinicService.findReservationByLastName("Schultz");
+        int found = reservations.size();
         
-        Owner owner = new Owner();
-        owner.setFirstName("Sam");
-        owner.setLastName("Schultz");
-        owner.setAddress("4, Evans Street");
-        owner.setCity("Wollongong");
-        owner.setTelephone("4444444444");
-        this.clinicService.saveOwner(owner);
-        assertThat(owner.getId().longValue()).isNotEqualTo(0);
+        Reservation reservation = new Reservation();
+        reservation.setFirstName("Sam");
+        reservation.setLastName("Schultz");
+        reservation.setAddress("4, Evans Street");
+        reservation.setCity("Wollongong");
+        reservation.setTelephone("4444444444");
+        this.clinicService.saveReservation(reservation);
+        assertThat(reservation.getId().longValue()).isNotEqualTo(0);
 
-        owners = this.clinicService.findOwnerByLastName("Schultz");
-        assertThat(owners.size()).isEqualTo(found + 1);
+        reservations = this.clinicService.findReservationByLastName("Schultz");
+        assertThat(reservations.size()).isEqualTo(found + 1);
     }
 
     @Test
     @Transactional
-    public void shouldUpdateOwner()  {
-        Owner owner = this.clinicService.findOwnerById(1);
-        String oldLastName = owner.getLastName();
+    public void shouldUpdateReservation()  {
+        Reservation reservation = this.clinicService.findReservationById(1);
+        String oldLastName = reservation.getLastName();
         String newLastName = oldLastName + "X";
         
-        owner.setLastName(newLastName);
-        this.clinicService.saveOwner(owner);
+        reservation.setLastName(newLastName);
+        this.clinicService.saveReservation(reservation);
 
         // retrieving new name from database
-        owner = this.clinicService.findOwnerById(1);
-        assertThat(owner.getLastName()).isEqualTo(newLastName);
+        reservation = this.clinicService.findReservationById(1);
+        assertThat(reservation.getLastName()).isEqualTo(newLastName);
     }
 
 

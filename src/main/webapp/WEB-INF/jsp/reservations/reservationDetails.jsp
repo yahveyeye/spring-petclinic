@@ -38,7 +38,7 @@
             	<spring:url value="{reservationId}/edit.html" var="editUrl">
                     <spring:param name="reservationId" value="${reservation.id}"/>
                 </spring:url>
-                <a href="${fn:escapeXml(editUrl)}" class="btn btn-info">Edit Reservation</a></td>
+            <%--     <a href="${fn:escapeXml(editUrl)}" class="btn btn-info">Edit Reservation</a></td> --%>
            
         </tr>
     </table>

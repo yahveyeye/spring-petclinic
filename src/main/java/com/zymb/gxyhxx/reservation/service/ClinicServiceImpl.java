@@ -15,6 +15,7 @@
  */
 package com.zymb.gxyhxx.reservation.service;
 
+import java.security.acl.Owner;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.zymb.gxyhxx.reservation.model.Owner;
 import com.zymb.gxyhxx.reservation.model.Reservation;
-import com.zymb.gxyhxx.reservation.repository.OwnerRepository;
 import com.zymb.gxyhxx.reservation.repository.ReservationRepository;
 
 /**
@@ -36,32 +35,12 @@ import com.zymb.gxyhxx.reservation.repository.ReservationRepository;
 @Service
 public class ClinicServiceImpl implements ClinicService {
 
-	private OwnerRepository ownerRepository;
 	private ReservationRepository reservationRepository;
 
 	@Autowired
-	public ClinicServiceImpl(OwnerRepository ownerRepository, ReservationRepository reservationRepository) {
+	public ClinicServiceImpl(ReservationRepository reservationRepository) {
 		super();
-		this.ownerRepository = ownerRepository;
 		this.reservationRepository = reservationRepository;
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Owner findOwnerById(int id) throws DataAccessException {
-		return ownerRepository.findById(id);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
-		return ownerRepository.findByLastName(lastName);
-	}
-
-	@Override
-	@Transactional
-	public void saveOwner(Owner owner) throws DataAccessException {
-		ownerRepository.save(owner);
 	}
 
 	@Override
