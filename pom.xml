@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.springframework.samples</groupId>
-	<artifactId>spring-petclinic</artifactId>
+	<groupId>com.zymb.gxyhxx</groupId>
+	<artifactId>gxyhxx-reservation</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>petclinic</name>
+	<name>reservation</name>
 	<packaging>war</packaging>
 
 	<properties>
@@ -259,6 +259,10 @@
 			<artifactId>datatables-export-itext</artifactId>
 			<version>${dandelion.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
@@ -388,5 +392,5 @@
 		</plugins>
 	</reporting>
 
-	<url>demopetclinic</url>
+	<url>gxyhxxreservation</url>
 </project>
