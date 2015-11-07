@@ -53,7 +53,7 @@ public class DataSourceConfig {
 	@NotProfile("javaee")
 	public DataSource dataSource() {
 		// See here for more details on commons-dbcp versus tomcat-jdbc:
-		// http://blog.ippon.fr/2013/03/13/improving-the-performance-of-the-spring-petclinic-sample-application-part-3-of-5/-->
+		// http://blog.ippon.fr/2013/03/13/improving-the-performance-of-the-spring-reservation-sample-application-part-3-of-5/-->
 		org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
 		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
 		dataSource.setUrl(env.getProperty("jdbc.url"));
@@ -69,7 +69,7 @@ public class DataSourceConfig {
 			throws IllegalArgumentException {
 		JndiObjectFactoryBean dataSource = new JndiObjectFactoryBean();
 		dataSource.setExpectedType(DataSource.class);
-		dataSource.setJndiName(env.getProperty("java:comp/env/jdbc/petclinic"));
+		dataSource.setJndiName(env.getProperty("java:comp/env/jdbc/reservation"));
 		return dataSource;
 	}
 	

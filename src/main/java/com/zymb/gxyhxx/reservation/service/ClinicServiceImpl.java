@@ -15,11 +15,9 @@
  */
 package com.zymb.gxyhxx.reservation.service;
 
-import java.security.acl.Owner;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +25,7 @@ import com.zymb.gxyhxx.reservation.model.Reservation;
 import com.zymb.gxyhxx.reservation.repository.ReservationRepository;
 
 /**
- * Mostly used as a facade for all Petclinic controllers Also a placeholder
+ * Mostly used as a facade for all reservation controllers Also a placeholder
  * for @Transactional and @Cacheable annotations
  *
  * @author Michael Isvy

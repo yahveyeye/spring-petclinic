@@ -62,7 +62,7 @@ public class SharedJpaConfig {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
         // gDickens: BOTH Persistence Unit and Packages to Scan are NOT compatible, persistenceUnit will win
-        em.setPersistenceUnitName("petclinic");
+        em.setPersistenceUnitName("reservation");
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		em.setJpaProperties(jpaProperties);
