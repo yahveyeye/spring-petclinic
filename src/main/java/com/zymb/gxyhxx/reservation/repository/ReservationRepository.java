@@ -48,11 +48,24 @@ import com.zymb.gxyhxx.reservation.model.Reservation;
  */
 public interface ReservationRepository {
 
+	
+	/**
+     * Retrieve <code>Reservation</code>s from the data store by last name, returning all reservations whose last name <i>starts</i>
+     * with the given name.
+     *
+     * @param idCardNo Value to search for
+     * @param personName Value to search for
+     * @return a <code>Collection</code> of matching <code>Reservation</code>s (or an empty <code>Collection</code> if none
+     *         found)
+     */
+    Collection<Reservation> findByIdCardNoAndPersonName(String idCardNo,String personName) throws DataAccessException;
+	
+	
     /**
      * Retrieve <code>Reservation</code>s from the data store by last name, returning all reservations whose last name <i>starts</i>
      * with the given name.
      *
-     * @param lastName Value to search for
+     * @param idCardNo Value to search for
      * @return a <code>Collection</code> of matching <code>Reservation</code>s (or an empty <code>Collection</code> if none
      *         found)
      */
@@ -69,6 +82,8 @@ public interface ReservationRepository {
     Reservation findById(int id) throws DataAccessException;
 
 
+    
+    
     /**
      * Save an <code>Reservation</code> to the data store, either inserting or updating it.
      *

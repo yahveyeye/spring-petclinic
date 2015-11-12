@@ -23,6 +23,8 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.zymb.gxyhxx.reservation.annotation.Unique;
+
 /**
  * Simple JavaBean domain object representing an person.
  *

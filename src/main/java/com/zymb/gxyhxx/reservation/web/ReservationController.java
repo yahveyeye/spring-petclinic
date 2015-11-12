@@ -52,7 +52,7 @@ public class ReservationController {
     @Autowired
     public ReservationController(ClinicService clinicService) {
         this.clinicService = clinicService;
-        this.validator=new ReservationValidator(clinicService);
+        //this.validator=new ReservationValidator(clinicService);
     }
 
     @InitBinder
@@ -89,15 +89,16 @@ public class ReservationController {
     public String processFindForm(Reservation reservation, BindingResult result, Map<String, Object> model) {
 
         // allow parameterless GET request for /reservations to return all records
-        if (reservation.getIdCardNo() == null) {
-            reservation.setIdCardNo(""); // empty string signifies broadest possible search
+        if (reservation.getIdCardNo() == null || reservation.getPersonName()==null) {
+            reservation.setIdCardNo(""); 
+            reservation.setPersonName("");;// empty string signifies broadest possible search
         }
 
         // find reservations by last name
-        Collection<Reservation> results = this.clinicService.findReservationByIdCardNo(reservation.getIdCardNo());
+        Collection<Reservation> results = this.clinicService.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(),reservation.getPersonName());
         if (results.isEmpty()) {
             // no reservations found
-            result.rejectValue("IdCardNo", "notFound", "not found");
+            result.rejectValue("idCardNo", "notFound", "not found");
             return "reservations/findReservations";
         }
         else if (results.size() == 1) {
@@ -143,13 +144,13 @@ public class ReservationController {
         return mav;
     }
     
-    @RequestMapping(value="/reservations/testJson/{name}", method = RequestMethod.GET)
-	public @ResponseBody Reservation getShopInJSON(@PathVariable("name") String name) {
-
-		Reservation reservation = new Reservation();
-		reservation.setPersonName(name);
+    
+    @RequestMapping(value="/phone/new", method = RequestMethod.POST)
+	public @ResponseBody Reservation createReservation(Reservation reservation) {
+    	this.clinicService.saveReservation(reservation);
 		return reservation;
 
 	}
+    
     
 }

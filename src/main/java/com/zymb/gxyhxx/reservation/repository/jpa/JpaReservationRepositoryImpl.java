@@ -21,6 +21,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.support.OpenSessionInViewFilter;
 import org.springframework.stereotype.Repository;
 
@@ -80,5 +81,15 @@ public class JpaReservationRepositoryImpl implements ReservationRepository {
     	}
 
     }
+
+    @SuppressWarnings("unchecked")
+	public Collection<Reservation> findByIdCardNoAndPersonName(String idCardNo, String personName)
+			throws DataAccessException {
+    	 Query query = this.em.createQuery("SELECT DISTINCT reservation FROM Reservation reservation  WHERE reservation.idCardNo=:idCardNo AND personName=:personName");
+         query.setParameter("idCardNo", idCardNo);
+         query.setParameter("personName", personName);
+         return query.getResultList();
+		
+	}
 
 }

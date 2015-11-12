@@ -18,6 +18,10 @@
 
     <table class="table table-striped" style="width:600px;">
         <tr>
+            <th>预约号</th>
+            <td><b><c:out value="${reservation.id} "/></b></td>
+        </tr>
+        <tr>
             <th>姓名</th>
             <td><b><c:out value="${reservation.personName} "/></b></td>
         </tr>
