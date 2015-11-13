@@ -150,8 +150,9 @@ public class ReservationController {
      * @return reservation
      */
     @RequestMapping(value="/phone/new", method = RequestMethod.POST)
-	public @ResponseBody Reservation createReservation(Reservation reservation) {
+	public @ResponseBody Reservation createReservation(Reservation reservation, SessionStatus status) {
     	this.clinicService.saveReservation(reservation);
+    	status.setComplete();
 		return reservation;
 
 	}
@@ -161,9 +162,10 @@ public class ReservationController {
      * @return reservation
      */
     @RequestMapping(value="/phone/find", method = RequestMethod.POST)
-	public @ResponseBody Reservation findReservation(Reservation reservation) {
+	public @ResponseBody Reservation findReservation(Reservation reservation,SessionStatus status) {
     	Collection<Reservation> results = this.clinicService.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(),reservation.getPersonName());
-		return reservation;
+    	status.setComplete();
+    	return reservation;
 
 	}
     
