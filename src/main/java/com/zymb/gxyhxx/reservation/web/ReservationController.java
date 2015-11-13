@@ -52,13 +52,13 @@ public class ReservationController {
     @Autowired
     public ReservationController(ClinicService clinicService) {
         this.clinicService = clinicService;
-        //this.validator=new ReservationValidator(clinicService);
+        this.validator=new ReservationValidator(clinicService);
     }
 
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
-        dataBinder.setValidator(validator);
+        //dataBinder.setValidator(validator);
     }
 
     @RequestMapping(value = "/reservations/new", method = RequestMethod.GET)
@@ -144,13 +144,27 @@ public class ReservationController {
         return mav;
     }
     
-    
+    /**客户端新预约接口
+     * 
+     * @param reservation
+     * @return reservation
+     */
     @RequestMapping(value="/phone/new", method = RequestMethod.POST)
 	public @ResponseBody Reservation createReservation(Reservation reservation) {
     	this.clinicService.saveReservation(reservation);
 		return reservation;
 
 	}
-    
+    /**客户端查询接口
+     * 
+     * @param reservation
+     * @return reservation
+     */
+    @RequestMapping(value="/phone/find", method = RequestMethod.POST)
+	public @ResponseBody Reservation findReservation(Reservation reservation) {
+    	Collection<Reservation> results = this.clinicService.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(),reservation.getPersonName());
+		return reservation;
+
+	}
     
 }

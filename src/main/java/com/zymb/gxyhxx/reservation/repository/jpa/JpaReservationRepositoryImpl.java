@@ -85,7 +85,7 @@ public class JpaReservationRepositoryImpl implements ReservationRepository {
     @SuppressWarnings("unchecked")
 	public Collection<Reservation> findByIdCardNoAndPersonName(String idCardNo, String personName)
 			throws DataAccessException {
-    	 Query query = this.em.createQuery("SELECT DISTINCT reservation FROM Reservation reservation  WHERE reservation.idCardNo=:idCardNo AND personName=:personName");
+    	 Query query = this.em.createQuery("SELECT DISTINCT reservation FROM Reservation reservation  WHERE reservation.idCardNo=:idCardNo AND reservation.personName=:personName");
          query.setParameter("idCardNo", idCardNo);
          query.setParameter("personName", personName);
          return query.getResultList();

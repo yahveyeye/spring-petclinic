@@ -17,13 +17,12 @@ package com.zymb.gxyhxx.reservation.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.zymb.gxyhxx.reservation.annotation.Unique;
+import com.zymb.gxyhxx.reservation.annotation.IdCardNoUnique;
 
 /**
  * Simple JavaBean domain object representing an person.
@@ -43,6 +42,7 @@ public class Person extends BaseEntity {
     @Column(name = "id_card_no",unique=true)
     @NotEmpty
     @Pattern(regexp="^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",message="身份证号码格式不对")
+    //@IdCardNoUnique(message="该身份证已预约")
     protected String idCardNo;
 
 	public String getPersonName() {
