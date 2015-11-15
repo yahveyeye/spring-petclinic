@@ -35,14 +35,14 @@ public class Person extends BaseEntity {
 
 	//姓名
     @Column(name = "person_name")
-    @NotEmpty
-    @Length(min=2, max=20)
+//    @NotEmpty
+//    @Length(min=2, max=20)
     protected String personName;
 
     //身份证号
     @Column(name = "id_card_no",unique=true)
-    @NotEmpty
-    @Pattern(regexp="^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",message="身份证号码格式不对")
+//    @NotEmpty
+//    @Pattern(regexp="^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",message="身份证号码格式不对")
     protected String idCardNo;
 
 	public String getPersonName() {

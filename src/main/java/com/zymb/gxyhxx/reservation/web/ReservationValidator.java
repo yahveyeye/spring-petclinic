@@ -4,19 +4,15 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
-
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.zymb.gxyhxx.reservation.model.Reservation;
 import com.zymb.gxyhxx.reservation.service.ClinicService;
-import com.zymb.gxyhxx.reservation.service.ClinicServiceImpl;
 
 
 public class ReservationValidator extends LocalValidatorFactoryBean implements Validator {
 
-	
 	private final ClinicService clinicService;
 
 
@@ -28,7 +24,7 @@ public class ReservationValidator extends LocalValidatorFactoryBean implements V
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return Reservation.class.equals(clazz);
+		return Reservation.class.isAssignableFrom(clazz);
 		
 	}
 
@@ -44,6 +40,9 @@ public class ReservationValidator extends LocalValidatorFactoryBean implements V
 		    if (results.size() == 1) {
 		    	errors.rejectValue("idCardNo", null,"该身份证号已预约");
 		        }
+        }
+        else {
+        	errors.rejectValue("idCardNo", null,"身份证号不能为空");
         }
 
 	}

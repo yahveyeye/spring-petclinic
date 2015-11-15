@@ -23,6 +23,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -30,11 +32,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.zymb.gxyhxx.reservation.model.Reservation;
 import com.zymb.gxyhxx.reservation.model.Reservation;
 import com.zymb.gxyhxx.reservation.service.ClinicService;
 
@@ -42,12 +42,11 @@ import com.zymb.gxyhxx.reservation.service.ClinicService;
  * @author yuan lin
  */
 @Controller
-@SessionAttributes(types = Reservation.class)
 public class ReservationController {
 
     private final ClinicService clinicService;
 
-    private  ReservationValidator validator ;
+//    private  ReservationValidator validator ;
 
     @Autowired
     public ReservationController(ClinicService clinicService) {
@@ -55,10 +54,15 @@ public class ReservationController {
         //this.validator=new ReservationValidator(clinicService);
     }
 
+    @InitBinder("reservation")
+    public void initReservationBinder(WebDataBinder dataBinder) {
+//        dataBinder.setValidator(new PetValidator());
+        dataBinder.setValidator(new ReservationValidator(clinicService));
+    }
+    
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
-        dataBinder.setValidator(validator);
     }
 
     @RequestMapping(value = "/reservations/new", method = RequestMethod.GET)
@@ -67,17 +71,32 @@ public class ReservationController {
         model.put("reservation", reservation);
         return "reservations/createOrUpdateReservationForm";
     }
-
+    
+    
     @RequestMapping(value = "/reservations/new", method = RequestMethod.POST)
-    public String processCreationForm(@Valid Reservation reservation, BindingResult result, SessionStatus status) {
+    public String processCreationForm( @Valid Reservation reservation, BindingResult result, ModelMap model) {
+        if (StringUtils.hasLength(reservation.getIdCardNo()) && reservation.isNew() && clinicService.findReservationByIdCardNo(reservation.getIdCardNo()) != null){
+            result.rejectValue("IdCardNo", "duplicate", "already exists");
+        }
         if (result.hasErrors()) {
+            model.put("reservation", reservation);
             return "reservations/createOrUpdateReservationForm";
         } else {
             this.clinicService.saveReservation(reservation);
-            status.setComplete();
-            return "redirect:/reservations/" + reservation.getId();
+            return "redirect:/reservations/"+ reservation.getId();
         }
     }
+
+//    @RequestMapping(value = "/reservations/new", method = RequestMethod.POST)
+//    public String processCreationForm(@Valid Reservation reservation, BindingResult result, SessionStatus status) {
+//        if (result.hasErrors()) {
+//            return "reservations/createOrUpdateReservationForm";
+//        } else {
+//            this.clinicService.saveReservation(reservation);
+//            status.setComplete();
+//            return "redirect:/reservations/" + reservation.getId();
+//        }
+//    }
 
     @RequestMapping(value = "/reservations/find", method = RequestMethod.GET)
     public String initFindForm(Map<String, Object> model) {
