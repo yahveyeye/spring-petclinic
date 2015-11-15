@@ -36,8 +36,8 @@ public class ReservationValidator extends LocalValidatorFactoryBean implements V
         // 验证唯一性
         if(idCardNo.length()>0){
         	
-		    Collection<Reservation> results = this.clinicService.findReservationByIdCardNo(reservation.getIdCardNo());
-		    if (results.size() == 1) {
+		    Reservation result = this.clinicService.findReservationByIdCardNo(reservation.getIdCardNo());
+		    if (result == null) {
 		    	errors.rejectValue("idCardNo", null,"该身份证号已预约");
 		        }
         }

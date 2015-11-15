@@ -16,6 +16,7 @@
 package com.zymb.gxyhxx.reservation.repository.jpa;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -53,12 +54,16 @@ public class JpaReservationRepositoryImpl implements ReservationRepository {
      * - Turning on lazy-loading and using {@link OpenSessionInViewFilter}
      */
     @SuppressWarnings("unchecked")
-    public Collection<Reservation> findByIdCardNo(String idCardNo) {
+    public Reservation findByIdCardNo(String idCardNo) {
         // using 'join fetch' because a single query should load both reservations and pets
         // using 'left join fetch' because it might happen that an reservation does not have pets yet
         Query query = this.em.createQuery("SELECT DISTINCT reservation FROM Reservation reservation  WHERE reservation.idCardNo=:idCardNo");
         query.setParameter("idCardNo", idCardNo);
-        return query.getResultList();
+        List resultList = query.getResultList();
+        if(resultList.size()>0){
+        	return (Reservation) resultList.get(0);
+        } 
+		return null;
     }
 
     @Override

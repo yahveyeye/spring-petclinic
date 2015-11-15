@@ -49,7 +49,7 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Collection<Reservation> findReservationByIdCardNo(String idCardNo) {
+	public Reservation findReservationByIdCardNo(String idCardNo) {
 		return reservationRepository.findByIdCardNo(idCardNo);
 	}
 

@@ -69,7 +69,7 @@ public interface ReservationRepository {
      * @return a <code>Collection</code> of matching <code>Reservation</code>s (or an empty <code>Collection</code> if none
      *         found)
      */
-    Collection<Reservation> findByIdCardNo(String idCardNo) throws DataAccessException;
+    Reservation findByIdCardNo(String idCardNo) throws DataAccessException;
 
     /**
      * Retrieve an <code>Reservation</code> from the data store by id.

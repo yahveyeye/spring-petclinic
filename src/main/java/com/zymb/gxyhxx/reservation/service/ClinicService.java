@@ -29,7 +29,7 @@ public interface ClinicService {
 
 	void saveReservation(Reservation reservation);
 
-	Collection<Reservation> findReservationByIdCardNo(String idCardNo);
+	Reservation findReservationByIdCardNo(String idCardNo);
 
 	Reservation findReservationById(int reservationId);
 	

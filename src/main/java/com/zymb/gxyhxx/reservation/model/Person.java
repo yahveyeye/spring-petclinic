@@ -18,11 +18,6 @@ package com.zymb.gxyhxx.reservation.model;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.zymb.gxyhxx.reservation.annotation.Unique;
 
 /**
