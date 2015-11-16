@@ -54,7 +54,7 @@ public class ReservationController {
 
 	@InitBinder("reservation")
 	public void initReservationBinder(WebDataBinder dataBinder) {
-		dataBinder.setValidator(new PetValidator());
+		dataBinder.setValidator(new ReservationValidator());
 
 	}
 
@@ -109,28 +109,48 @@ public class ReservationController {
 
 		// allow parameterless GET request for /reservations to return all
 		// records
-		if (reservation.getIdCardNo() == null || reservation.getPersonName() == null) {
-			reservation.setIdCardNo("");
-			reservation.setPersonName("");
-			;// empty string signifies broadest possible search
-		}
+		// personName validator
+		// if (reservation.getPersonName().equals(null) ||
+		// reservation.getPersonName().equals("")) {
+		// result.rejectValue("personName", "required", "不能为空");
+		// }
+		// // idCardNo validator
+		// if (reservation.getIdCardNo().equals(null) ||
+		// reservation.getIdCardNo().equals("")) {
+		// result.rejectValue("idCardNo", "required", "不能为空");
+		// } else if
+		// (!ReservationValidator.match("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",
+		// reservation.getIdCardNo())) {
+		// result.rejectValue("idCardNo", null, "身份证号格式不对");
+		// }
+		if (result.hasErrors()) {
 
-		// find reservations by last name
-		Collection<Reservation> results = this.clinicService
-				.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(), reservation.getPersonName());
-		if (results.isEmpty()) {
-			// no reservations found
-			result.rejectValue("idCardNo", "notFound", "not found");
 			return "reservations/findReservations";
-		} else if (results.size() == 1) {
-			// 1 reservation found
-			reservation = results.iterator().next();
-			return "redirect:/reservations/" + reservation.getId();
 		} else {
-			// multiple reservations found
-			model.put("selections", results);
-			return "reservations/reservationsList";
+			// find reservations by last name
+			Collection<Reservation> results = this.clinicService
+					.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(), reservation.getPersonName());
+			if (results.isEmpty()) {
+				// no reservations found
+				result.rejectValue("idCardNo", "notFound", "not found");
+				return "reservations/findReservations";
+			} else if (results.size() == 1) {
+				// 1 reservation found
+				reservation = results.iterator().next();
+				return "redirect:/reservations/" + reservation.getId();
+			} else {
+				// multiple reservations found
+				model.put("selections", results);
+				return "reservations/reservationsList";
+			}
 		}
+	}
+
+	@RequestMapping(value = "/reservations/list", method = RequestMethod.GET)
+	public String processFindAll(Reservation reservation, BindingResult result, Map<String, Object> model) {
+		Collection<Reservation> results = this.clinicService.findAllReservation();
+		model.put("selections", results);
+		return "reservations/reservationsList";
 	}
 
 	@RequestMapping(value = "/reservations/{reservationId}/edit", method = RequestMethod.GET)
@@ -174,6 +194,10 @@ public class ReservationController {
 	 */
 	@RequestMapping(value = "/phone/new", method = RequestMethod.POST)
 	public @ResponseBody Reservation createReservation(Reservation reservation, SessionStatus status) {
+		if (StringUtils.hasLength(reservation.getIdCardNo()) && reservation.isNew()
+				&& clinicService.findReservationByIdCardNo(reservation.getIdCardNo()) != null) {
+			return null;
+		}
 		this.clinicService.saveReservation(reservation);
 		status.setComplete();
 		return reservation;
@@ -190,8 +214,15 @@ public class ReservationController {
 	public @ResponseBody Reservation findReservation(Reservation reservation, SessionStatus status) {
 		Collection<Reservation> results = this.clinicService
 				.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(), reservation.getPersonName());
-		status.setComplete();
-		return reservation;
+		if (results.isEmpty()) {
+			// no reservations found
+			return null;
+		} else {
+			// 1 reservation found
+			reservation = results.iterator().next();
+			return reservation;
+
+		}
 
 	}
 

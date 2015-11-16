@@ -64,4 +64,9 @@ public class ClinicServiceImpl implements ClinicService {
 		return reservationRepository.findByIdCardNoAndPersonName(idCardNo,personName);
 	}
 
+	@Override
+	public Collection<Reservation> findAllReservation() {
+		return reservationRepository.findAll();
+	}
+
 }

@@ -97,4 +97,12 @@ public class JpaReservationRepositoryImpl implements ReservationRepository {
 		
 	}
 
+    @SuppressWarnings("unchecked")
+   	public Collection<Reservation> findAll()
+   			throws DataAccessException {
+       	 Query query = this.em.createQuery("SELECT reservation FROM Reservation reservation");
+            
+            return query.getResultList();
+   		
+   	}
 }

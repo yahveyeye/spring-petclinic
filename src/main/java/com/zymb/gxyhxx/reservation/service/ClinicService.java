@@ -34,5 +34,7 @@ public interface ClinicService {
 	Reservation findReservationById(int reservationId);
 	
 	Collection<Reservation> findReservationByIdCardNoAndPersonName(String idCardNo,String personName);
+	
+	Collection<Reservation> findAllReservation();
 
 }

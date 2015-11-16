@@ -92,5 +92,6 @@ public interface ReservationRepository {
      */
     void save(Reservation reservation) throws DataAccessException;
 
+    public Collection<Reservation> findAll();
 
 }
