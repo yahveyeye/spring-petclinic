@@ -35,77 +35,62 @@ import org.springframework.core.style.ToStringCreator;
 @Entity
 @Table(name = "reservations")
 public class Reservation extends Person {
-    
-	//手机号码
+
+	// 手机号码
 	@Column(name = "phone")
-//	@NotEmpty
-//    @Pattern(regexp="^1[3-8]+\\d{9}",message="手机号码不合法")
-    private String phone;
 
-	//电子邮箱
-    @Column(name = "email")
-//    @NotEmpty
-//    @Email
-    private String email;
+	// @NotEmpty
+	// @Pattern(regexp="^1[3-8]+\\d{9}",message="手机号码不合法")
 
-    //qq号
-    @Column(name = "qq")
-//    @NotEmpty
-//    @Length(min=4, max=13)
-    private String qq;
+	private String phone;
 
+	// 电子邮箱
+	@Column(name = "email")
 
-    public String getPhone() {
+	// @NotEmpty
+	// @Email
+
+	private String email;
+
+	// qq号
+	@Column(name = "qq")
+
+	// @NotEmpty
+	// @Length(min=4, max=13)
+
+	private String qq;
+
+	public String getPhone() {
 		return phone;
 	}
-
-
-
 
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
-
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
-
 	public String getQq() {
 		return qq;
 	}
-
-
-
 
 	public void setQq(String qq) {
 		this.qq = qq;
 	}
 
 	@Override
-    public String toString() {
-        return new ToStringCreator(this)
+	public String toString() {
+		return new ToStringCreator(this)
 
-                .append("id", this.getId())
-                .append("new", this.isNew())
-                .append("lastName", this.getPersonName())
-                .append("firstName", this.getIdCardNo())
-                .append("address", this.phone)
-                .append("city", this.email)
-                .append("qq", this.qq)
-                .toString();
-    }
-	
-	
+				.append("id", this.getId()).append("new", this.isNew()).append("lastName", this.getPersonName())
+				.append("firstName", this.getIdCardNo()).append("address", this.phone).append("city", this.email)
+				.append("qq", this.qq).toString();
+	}
+
 }

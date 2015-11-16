@@ -44,132 +44,155 @@ import com.zymb.gxyhxx.reservation.service.ClinicService;
 @Controller
 public class ReservationController {
 
-    private final ClinicService clinicService;
+	private final ClinicService clinicService;
 
-//    private  ReservationValidator validator ;
+	@Autowired
+	public ReservationController(ClinicService clinicService) {
+		this.clinicService = clinicService;
 
-    @Autowired
-    public ReservationController(ClinicService clinicService) {
-        this.clinicService = clinicService;
-        //this.validator=new ReservationValidator(clinicService);
-    }
+	}
 
-    @InitBinder("reservation")
-    public void initReservationBinder(WebDataBinder dataBinder) {
-//        dataBinder.setValidator(new PetValidator());
-        dataBinder.setValidator(new ReservationValidator(clinicService));
-    }
-    
-    @InitBinder
-    public void setAllowedFields(WebDataBinder dataBinder) {
-        dataBinder.setDisallowedFields("id");
-    }
+	@InitBinder("reservation")
+	public void initReservationBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new PetValidator());
 
-    @RequestMapping(value = "/reservations/new", method = RequestMethod.GET)
-    public String initCreationForm(Map<String, Object> model) {
-    	Reservation reservation = new Reservation();
-        model.put("reservation", reservation);
-        return "reservations/createOrUpdateReservationForm";
-    }
-    
-    
-    @RequestMapping(value = "/reservations/new", method = RequestMethod.POST)
-    public String processCreationForm( @Valid Reservation reservation, BindingResult result, ModelMap model) {
-        if (StringUtils.hasLength(reservation.getIdCardNo()) && reservation.isNew() && clinicService.findReservationByIdCardNo(reservation.getIdCardNo()) != null){
-            result.rejectValue("IdCardNo", "duplicate", "already exists");
-        }
-        if (result.hasErrors()) {
-            model.put("reservation", reservation);
-            return "reservations/createOrUpdateReservationForm";
-        } else {
-            this.clinicService.saveReservation(reservation);
-            return "redirect:/reservations/"+ reservation.getId();
-        }
-    }
+	}
 
-//    @RequestMapping(value = "/reservations/new", method = RequestMethod.POST)
-//    public String processCreationForm(@Valid Reservation reservation, BindingResult result, SessionStatus status) {
-//        if (result.hasErrors()) {
-//            return "reservations/createOrUpdateReservationForm";
-//        } else {
-//            this.clinicService.saveReservation(reservation);
-//            status.setComplete();
-//            return "redirect:/reservations/" + reservation.getId();
-//        }
-//    }
+	@InitBinder
+	public void setAllowedFields(WebDataBinder dataBinder) {
+		dataBinder.setDisallowedFields("id");
 
-    @RequestMapping(value = "/reservations/find", method = RequestMethod.GET)
-    public String initFindForm(Map<String, Object> model) {
-        model.put("reservation", new Reservation());
-        return "reservations/findReservations";
-    }
+	}
 
-    @RequestMapping(value = "/reservations", method = RequestMethod.GET)
-    public String processFindForm(Reservation reservation, BindingResult result, Map<String, Object> model) {
+	@RequestMapping(value = "/reservations/new", method = RequestMethod.GET)
+	public String initCreationForm(Map<String, Object> model) {
+		Reservation reservation = new Reservation();
+		model.put("reservation", reservation);
+		return "reservations/createOrUpdateReservationForm";
+	}
 
-        // allow parameterless GET request for /reservations to return all records
-        if (reservation.getIdCardNo() == null || reservation.getPersonName()==null) {
-            reservation.setIdCardNo(""); 
-            reservation.setPersonName("");;// empty string signifies broadest possible search
-        }
+	@RequestMapping(value = "/reservations/new", method = RequestMethod.POST)
+	public String processCreationForm(@Valid Reservation reservation, BindingResult result, ModelMap model) {
+		if (StringUtils.hasLength(reservation.getIdCardNo()) && reservation.isNew()
+				&& clinicService.findReservationByIdCardNo(reservation.getIdCardNo()) != null) {
+			result.rejectValue("IdCardNo", "duplicate", "already exists");
+		}
+		if (result.hasErrors()) {
+			model.put("reservation", reservation);
+			return "reservations/createOrUpdateReservationForm";
+		} else {
+			this.clinicService.saveReservation(reservation);
+			return "redirect:/reservations/" + reservation.getId();
+		}
+	}
 
-        // find reservations by last name
-        Collection<Reservation> results = this.clinicService.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(),reservation.getPersonName());
-        if (results.isEmpty()) {
-            // no reservations found
-            result.rejectValue("idCardNo", "notFound", "not found");
-            return "reservations/findReservations";
-        }
-        else if (results.size() == 1) {
-    	// 1 reservation found
-    	reservation = results.iterator().next();
-    	return "redirect:/reservations/" + reservation.getId();
-        }
-        else {
-            // multiple reservations found
-            model.put("selections", results);
-            return "reservations/reservationsList";
-        }
-    }
-        
-    @RequestMapping(value = "/reservations/{reservationId}/edit", method = RequestMethod.GET)
-    public String initUpdateReservationForm(@PathVariable("reservationId") int reservationId, Model model) {
-        Reservation reservation = this.clinicService.findReservationById(reservationId);
-        model.addAttribute(reservation);
-        return "reservations/createOrUpdateReservationForm";
-    }
+	// @RequestMapping(value = "/reservations/new", method = RequestMethod.POST)
+	// public String processCreationForm(@Valid Reservation reservation,
+	// BindingResult result, SessionStatus status) {
+	// if (result.hasErrors()) {
+	// return "reservations/createOrUpdateReservationForm";
+	// } else {
+	// this.clinicService.saveReservation(reservation);
+	// status.setComplete();
+	// return "redirect:/reservations/" + reservation.getId();
+	// }
+	// }
 
-    @RequestMapping(value = "/reservations/{reservationId}/edit", method = RequestMethod.PUT)
-    public String processUpdateReservationForm(@Valid Reservation reservation, BindingResult result, SessionStatus status) {
-        if (result.hasErrors()) {
-            return "reservations/createOrUpdateReservationForm";
-        } else {
-            this.clinicService.saveReservation(reservation);
-            status.setComplete();
-            return "redirect:/reservations/{reservationId}";
-        }
-    }
+	@RequestMapping(value = "/reservations/find", method = RequestMethod.GET)
+	public String initFindForm(Map<String, Object> model) {
+		model.put("reservation", new Reservation());
+		return "reservations/findReservations";
+	}
 
-    /**
-     * Custom handler for displaying an reservation.
-     *
-     * @param reservationId the ID of the reservation to display
-     * @return a ModelMap with the model attributes for the view
-     */
-    @RequestMapping("/reservations/{reservationId}")
-    public ModelAndView showReservation(@PathVariable("reservationId") int reservationId) {
-        ModelAndView mav = new ModelAndView("reservations/reservationDetails");
-        mav.addObject(this.clinicService.findReservationById(reservationId));
-        return mav;
-    }
-    
-    
-    @RequestMapping(value="/phone/new", method = RequestMethod.POST)
-	public @ResponseBody Reservation createReservation(Reservation reservation) {
-    	this.clinicService.saveReservation(reservation);
+	@RequestMapping(value = "/reservations", method = RequestMethod.GET)
+	public String processFindForm(Reservation reservation, BindingResult result, Map<String, Object> model) {
+
+		// allow parameterless GET request for /reservations to return all
+		// records
+		if (reservation.getIdCardNo() == null || reservation.getPersonName() == null) {
+			reservation.setIdCardNo("");
+			reservation.setPersonName("");
+			;// empty string signifies broadest possible search
+		}
+
+		// find reservations by last name
+		Collection<Reservation> results = this.clinicService
+				.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(), reservation.getPersonName());
+		if (results.isEmpty()) {
+			// no reservations found
+			result.rejectValue("idCardNo", "notFound", "not found");
+			return "reservations/findReservations";
+		} else if (results.size() == 1) {
+			// 1 reservation found
+			reservation = results.iterator().next();
+			return "redirect:/reservations/" + reservation.getId();
+		} else {
+			// multiple reservations found
+			model.put("selections", results);
+			return "reservations/reservationsList";
+		}
+	}
+
+	@RequestMapping(value = "/reservations/{reservationId}/edit", method = RequestMethod.GET)
+	public String initUpdateReservationForm(@PathVariable("reservationId") int reservationId, Model model) {
+		Reservation reservation = this.clinicService.findReservationById(reservationId);
+		model.addAttribute(reservation);
+		return "reservations/createOrUpdateReservationForm";
+	}
+
+	@RequestMapping(value = "/reservations/{reservationId}/edit", method = RequestMethod.PUT)
+	public String processUpdateReservationForm(@Valid Reservation reservation, BindingResult result,
+			SessionStatus status) {
+		if (result.hasErrors()) {
+			return "reservations/createOrUpdateReservationForm";
+		} else {
+			this.clinicService.saveReservation(reservation);
+			status.setComplete();
+			return "redirect:/reservations/{reservationId}";
+		}
+	}
+
+	/**
+	 * Custom handler for displaying an reservation.
+	 *
+	 * @param reservationId
+	 *            the ID of the reservation to display
+	 * @return a ModelMap with the model attributes for the view
+	 */
+	@RequestMapping("/reservations/{reservationId}")
+	public ModelAndView showReservation(@PathVariable("reservationId") int reservationId) {
+		ModelAndView mav = new ModelAndView("reservations/reservationDetails");
+		mav.addObject(this.clinicService.findReservationById(reservationId));
+		return mav;
+	}
+
+	/**
+	 * 客户端新预约接口
+	 * 
+	 * @param reservation
+	 * @return reservation
+	 */
+	@RequestMapping(value = "/phone/new", method = RequestMethod.POST)
+	public @ResponseBody Reservation createReservation(Reservation reservation, SessionStatus status) {
+		this.clinicService.saveReservation(reservation);
+		status.setComplete();
 		return reservation;
 
 	}
-    
-    
+
+	/**
+	 * 客户端查询接口
+	 * 
+	 * @param reservation
+	 * @return reservation
+	 */
+	@RequestMapping(value = "/phone/find", method = RequestMethod.POST)
+	public @ResponseBody Reservation findReservation(Reservation reservation, SessionStatus status) {
+		Collection<Reservation> results = this.clinicService
+				.findReservationByIdCardNoAndPersonName(reservation.getIdCardNo(), reservation.getPersonName());
+		status.setComplete();
+		return reservation;
+
+	}
+
 }
