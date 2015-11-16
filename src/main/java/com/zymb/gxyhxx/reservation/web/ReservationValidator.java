@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.zymb.gxyhxx.reservation.model.Reservation;
 import com.zymb.gxyhxx.reservation.service.ClinicService;
 import com.zymb.gxyhxx.reservation.service.ClinicServiceImpl;
-public class ReservationValidator extends LocalValidatorFactoryBean implements Validator {
+public class ReservationValidator implements Validator {
 
 	
 
-	private boolean match(String regex, String str) {
+	public static boolean match(String regex, String str) {
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(str);
 		return matcher.matches();
@@ -40,31 +40,31 @@ public class ReservationValidator extends LocalValidatorFactoryBean implements V
 
 		// personName validator
 		if (personName.equals(null) || personName.equals("")) {
-			errors.rejectValue("personName", null, "濮撳悕涓嶈兘涓虹┖");
+			errors.rejectValue("personName", "required", "不能为空");
 		}
 		// idCardNo validator
 		if(idCardNo.equals(null) || idCardNo.equals("")) {
-			errors.rejectValue("idCardNo", null, "韬唤璇佷笉鑳戒负绌�");
+			errors.rejectValue("idCardNo", "required", "不能为空");
 		}else if(!match("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",idCardNo)){
-			errors.rejectValue("idCardNo", null, "韬唤璇佹牸寮忎笉瀵�");
+			errors.rejectValue("idCardNo",null, "身份证号格式不对");
 		}
 		
 		// email validator
 		if(email.equals(null) || email.equals("")) {
-			errors.rejectValue("email", null, "鐢靛瓙閭涓嶈兘涓虹┖");
+			errors.rejectValue("email","required", "不能为空");
 		}else if(!match("^([\\w-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([\\w-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$",email)){
-			errors.rejectValue("email", null, "鐢靛瓙閭鏍煎紡涓嶅");
+			errors.rejectValue("email", null, "电子邮箱格式不对");
 		}
 		
 		//phone validator
 		if(phone.equals(null) || phone.equals("")) {
-			errors.rejectValue("phone", null, "鎵嬫満鍙蜂笉鑳戒负绌�");
-		}else if(!match("^1[3-8]+\\d{9}",email)){
-			errors.rejectValue("phone", null, "鎵嬫満鍙锋牸寮忎笉瀵�");
+			errors.rejectValue("phone", "required", "不能为空");
+		}else if(!match("^1[3-8]+\\d{9}",phone)){
+			errors.rejectValue("phone", null, "手机号格式不对");
 		}
 		//qq validator
 		if(qq.equals(null) || qq.equals("")) {
-			errors.rejectValue("qq", null, "鎵嬫満鍙蜂笉鑳戒负绌�");
+			errors.rejectValue("qq", "required", "不能为空");
 		}
 
 	}

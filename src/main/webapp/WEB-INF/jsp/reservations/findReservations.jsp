@@ -22,12 +22,12 @@
             <div class="control-group" id="personName">
                 <label class="control-label">姓名 </label>
                 <form:input path="personName" size="30" maxlength="80"/>
-                <span class="help-inline"><form:errors path="*"/></span>
+                <span class="help-inline"><form:errors path="personName"/></span>
             </div>
             <div class="control-group" id="idCardNo">
                 <label class="control-label">身份证号码 </label>
                 <form:input path="idCardNo" size="30" maxlength="80"/>
-                <span class="help-inline"><form:errors path="*"/></span>
+                <span class="help-inline"><form:errors path="idCardNo"/></span>
             </div>
             
             <div class="form-actions">

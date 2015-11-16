@@ -110,19 +110,19 @@ public class ReservationController {
 		// allow parameterless GET request for /reservations to return all
 		// records
 		// personName validator
-		// if (reservation.getPersonName().equals(null) ||
-		// reservation.getPersonName().equals("")) {
-		// result.rejectValue("personName", "required", "不能为空");
-		// }
-		// // idCardNo validator
-		// if (reservation.getIdCardNo().equals(null) ||
-		// reservation.getIdCardNo().equals("")) {
-		// result.rejectValue("idCardNo", "required", "不能为空");
-		// } else if
-		// (!ReservationValidator.match("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",
-		// reservation.getIdCardNo())) {
-		// result.rejectValue("idCardNo", null, "身份证号格式不对");
-		// }
+		 if (reservation.getPersonName().equals(null) ||
+		 reservation.getPersonName().equals("")) {
+		 result.rejectValue("personName", "required", "不能为空");
+		 }
+		 // idCardNo validator
+		 if (reservation.getIdCardNo().equals(null) ||
+		 reservation.getIdCardNo().equals("")) {
+		 result.rejectValue("idCardNo", "required", "不能为空");
+		 } else if
+		 (!ReservationValidator.match("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",
+		 reservation.getIdCardNo())) {
+		 result.rejectValue("idCardNo", null, "身份证号格式不对");
+		 }
 		if (result.hasErrors()) {
 
 			return "reservations/findReservations";

@@ -17,17 +17,15 @@
     
     <datatables:table id="reservations" data="${selections}" row="reservation" theme="bootstrap2" 
                       cssClass="table table-striped" pageable="ture" info="false" export="xls">
-       <%--  <datatables:column title="姓名" display="xls">
-        <c:out value="${reservation.personName}"/>
-        </datatables:column> --%>
-        <datatables:column title="预约号" property="id" cssStyle="width: 30px;" />
-        <datatables:column title="姓名" property="personName" cssStyle="width: 50px;"/>
+       
+        <datatables:column title="预约号" property="id" cssStyle="width: 40px;" />
+        <datatables:column title="姓名" property="personName" cssStyle="width: 40px;"/>
         <datatables:column title="身份证号" property="idCardNo" cssStyle="width: 70px;"/>
         <datatables:column title="电子邮箱" property="email" cssStyle="width: 50px;"/>
-        <datatables:column title="手机号" property="phone" cssStyle="width: 50px;"/>
-        <datatables:column title="QQ号" property="qq" cssStyle="width: 50px;"/>
+        <datatables:column title="手机号" property="phone" cssStyle="width: 40px;"/>
+        <datatables:column title="QQ号" property="qq" cssStyle="width: 40px;"/>
             
-        <datatables:export type="xls" cssClass="btn" cssStyle="height: 25px;" />
+        <datatables:export type="xls" cssClass="btn" cssStyle="height: 20px;" />
     </datatables:table>
     
     
