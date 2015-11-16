@@ -34,13 +34,13 @@ public class Person extends BaseEntity {
 
 	//姓名
     @Column(name = "person_name")
-    @NotEmpty
+    //@NotEmpty
     //@Length(min=2, max=20)
     protected String personName;
 
     //身份证号
     @Column(name = "id_card_no")
-    @NotEmpty
+    //@NotEmpty
     //@Pattern(regexp="^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",message="身份证号码格式不对")
     //@IdCardNoUnique(message="该身份证已预约")
     protected String idCardNo;

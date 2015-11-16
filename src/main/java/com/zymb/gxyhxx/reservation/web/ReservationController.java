@@ -47,18 +47,17 @@ public class ReservationController {
 
     private final ClinicService clinicService;
 
-    private  ReservationValidator validator ;
 
     @Autowired
     public ReservationController(ClinicService clinicService) {
         this.clinicService = clinicService;
-        this.validator=new ReservationValidator(clinicService);
+        
     }
 
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
-        //dataBinder.setValidator(validator);
+        dataBinder.setValidator(new ReservationValidator(clinicService));
     }
 
     @RequestMapping(value = "/reservations/new", method = RequestMethod.GET)

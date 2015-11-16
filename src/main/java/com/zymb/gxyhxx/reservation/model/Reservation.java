@@ -38,19 +38,19 @@ public class Reservation extends Person {
     
 	//手机号码
 	@Column(name = "phone")
-	@NotEmpty
+	//@NotEmpty
     //@Pattern(regexp="^1[3-8]+\\d{9}",message="手机号码不合法")
     private String phone;
 
 	//电子邮箱
     @Column(name = "email")
-    @NotEmpty
+    //@NotEmpty
     //@Email
     private String email;
 
     //qq号
     @Column(name = "qq")
-    @NotEmpty
+    //@NotEmpty
     //@Length(min=4, max=13)
     private String qq;
 
