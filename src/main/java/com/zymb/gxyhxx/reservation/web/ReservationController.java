@@ -75,7 +75,7 @@ public class ReservationController {
 	public String processCreationForm(@Valid Reservation reservation, BindingResult result, ModelMap model) {
 		if (StringUtils.hasLength(reservation.getIdCardNo()) && reservation.isNew()
 				&& clinicService.findReservationByIdCardNo(reservation.getIdCardNo()) != null) {
-			result.rejectValue("IdCardNo", "duplicate", "already exists");
+			result.rejectValue("idCardNo", "duplicate", "already exists");
 		}
 		if (result.hasErrors()) {
 			model.put("reservation", reservation);
@@ -196,6 +196,7 @@ public class ReservationController {
 	public @ResponseBody Reservation createReservation(Reservation reservation, SessionStatus status) {
 		if (StringUtils.hasLength(reservation.getIdCardNo()) && reservation.isNew()
 				&& clinicService.findReservationByIdCardNo(reservation.getIdCardNo()) != null) {
+			status.setComplete();
 			return null;
 		}
 		this.clinicService.saveReservation(reservation);
