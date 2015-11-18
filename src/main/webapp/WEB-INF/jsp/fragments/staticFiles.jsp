@@ -1,19 +1,17 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
 
-<!--
-PetClinic :: a Spring Framework demonstration
--->
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>PetClinic :: a Spring Framework demonstration</title>
+    <title>广西银行学校高考报名预约系统</title>
 
 
     <spring:url value="/webjars/bootstrap/2.3.0/css/bootstrap.min.css" var="bootstrapCss"/>
     <link href="${bootstrapCss}" rel="stylesheet"/>
 
-    <spring:url value="/resources/css/petclinic.css" var="petclinicCss"/>
-    <link href="${petclinicCss}" rel="stylesheet"/>
+    <spring:url value="/resources/css/reservation.css" var="reservationCss"/>
+    <link href="${reservationCss}" rel="stylesheet"/>
 
     <spring:url value="/webjars/jquery/2.0.3/jquery.js" var="jQuery"/>
     <script src="${jQuery}"></script>

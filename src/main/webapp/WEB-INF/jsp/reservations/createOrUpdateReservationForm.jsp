@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="reservation" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" pageEncoding="UTF-8"%>
 
 <html lang="en">
@@ -26,11 +26,11 @@
     </h2>
     <form:form modelAttribute="reservation" method="${method}" class="form-horizontal" id="add-reservation-form">
       
-        <petclinic:inputField label="姓名" name="personName"/>
-        <petclinic:inputField label="身份证号" name="idCardNo"/>
-        <petclinic:inputField label="手机号" name="phone"/>
-        <petclinic:inputField label="电子邮箱" name="email"/>
-        <petclinic:inputField label="qq号" name="qq"/>
+        <reservation:inputField label="姓名" name="personName"/>
+        <reservation:inputField label="身份证号" name="idCardNo"/>
+        <reservation:inputField label="手机号" name="phone"/>
+        <reservation:inputField label="电子邮箱" name="email"/>
+        <reservation:inputField label="qq号" name="qq"/>
 	
 
 
