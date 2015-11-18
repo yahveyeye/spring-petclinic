@@ -9,14 +9,26 @@
 <html lang="en">
 
 <jsp:include page="../fragments/staticFiles.jsp"/>
-
+<script>
+$(document).ready(function() {
+	$.extend( $.fn.dataTable.defaults, {
+	    "searching": false,
+	    "language": {
+	    	"zeroRecords": "没有预约信息"
+	      },
+	      "stateSave": true,
+	      "autoWidth": false,
+	} );
+});
+</script>
 <body>
-<div class="container">
+<div class="container" >
     <jsp:include page="../fragments/bodyHeader.jsp"/>
     
     
     <datatables:table id="reservations" data="${selections}" row="reservation" theme="bootstrap2" 
-                      cssClass="table table-striped" pageable="ture" info="false" export="xls">
+                      cssClass="table table-striped" pageable="false" info="false" export="xls" 
+                      >
        
         <datatables:column title="预约号" property="id" cssStyle="width: 40px;" />
         <datatables:column title="姓名" property="personName" cssStyle="width: 40px;"/>
@@ -25,7 +37,7 @@
         <datatables:column title="手机号" property="phone" cssStyle="width: 40px;"/>
         <datatables:column title="QQ号" property="qq" cssStyle="width: 40px;"/>
             
-        <datatables:export type="xls" cssClass="btn" cssStyle="height: 20px;" />
+        <datatables:export type="xls" cssClass="btn" cssStyle="height: 20px;"/>
     </datatables:table>
     
     
