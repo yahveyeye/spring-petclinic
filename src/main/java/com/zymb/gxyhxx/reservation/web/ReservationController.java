@@ -119,7 +119,7 @@ public class ReservationController {
 		 reservation.getIdCardNo().equals("")) {
 		 result.rejectValue("idCardNo", "required", "不能为空");
 		 } else if
-		 (!ReservationValidator.match("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",
+		 (!ReservationValidator.match("(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x)$)",
 		 reservation.getIdCardNo())) {
 		 result.rejectValue("idCardNo", null, "身份证号格式不对");
 		 }

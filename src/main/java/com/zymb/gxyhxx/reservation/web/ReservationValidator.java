@@ -45,7 +45,7 @@ public class ReservationValidator implements Validator {
 		// idCardNo validator
 		if(idCardNo.equals(null) || idCardNo.equals("")) {
 			errors.rejectValue("idCardNo", "required", "不能为空");
-		}else if(!match("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{4}$",idCardNo)){
+		}else if(!match("(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x)$)",idCardNo)){
 			errors.rejectValue("idCardNo",null, "身份证号格式不对");
 		}
 		
@@ -65,6 +65,8 @@ public class ReservationValidator implements Validator {
 		//qq validator
 		if(qq.equals(null) || qq.equals("")) {
 			errors.rejectValue("qq", "required", "不能为空");
+		}else if(!match("^\\d{4,12}$",qq)){
+			errors.rejectValue("qq", null, "qq号格式不对");
 		}
 
 	}
