@@ -13,9 +13,13 @@
 <jsp:include page="../fragments/staticFiles.jsp"/>
 
 <body>
+<jsp:include page="../fragments/bodyHeader.jsp"/>
+
 <div class="container">
-    <jsp:include page="../fragments/bodyHeader.jsp"/>
-    <c:choose>
+    <div style="width: 800px; height:200px; background-color: #5b9be0;padding-top: 10px;">
+    
+    </div>
+    <%-- <c:choose>
         <c:when test="${reservation['new']}"><c:set var="method" value="post"/></c:when>
         <c:otherwise><c:set var="method" value="put"/></c:otherwise>
     </c:choose>
@@ -25,7 +29,7 @@
     </h2>
     <form:form modelAttribute="reservation" method="${method}" class="form-horizontal" id="add-reservation-form">
         <petclinic:inputField label="姓名" name="personName"/>
-        <petclinic:inputField label="身份证号" name="idCardNo"/>
+        <petclinic:inputField label="身份证号" name="idCardNo" />
         <petclinic:inputField label="手机号" name="phone"/>
         <petclinic:inputField label="电子邮箱" name="email"/>
         <petclinic:inputField label="qq号" name="qq"/>
@@ -42,8 +46,9 @@
                 </c:otherwise>
             </c:choose>
         </div>
-    </form:form>
+    </form:form> --%>
 </div>
+
 <jsp:include page="../fragments/footer.jsp"/>
 </body>
 

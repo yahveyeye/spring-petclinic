@@ -15,7 +15,7 @@
     <div class="${cssGroup}">
         <label class="control-label">${label}</label>
 
-        <div class="controls">
+        <div class="controls" style="text-align: left !important;">
             <form:select path="${name}" items="${names}" size="${size}"/>
             <span class="help-inline">${status.errorMessage}</span>
         </div>

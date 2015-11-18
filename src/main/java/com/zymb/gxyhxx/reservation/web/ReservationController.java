@@ -196,6 +196,7 @@ public class ReservationController {
 	public @ResponseBody Reservation createReservation(Reservation reservation, SessionStatus status) {
 		if (StringUtils.hasLength(reservation.getIdCardNo()) && reservation.isNew()
 				&& clinicService.findReservationByIdCardNo(reservation.getIdCardNo()) != null) {
+			status.setComplete();
 			return null;
 		}
 		this.clinicService.saveReservation(reservation);

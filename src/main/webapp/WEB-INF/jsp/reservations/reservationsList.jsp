@@ -14,30 +14,34 @@ $(document).ready(function() {
 	$.extend( $.fn.dataTable.defaults, {
 	    "searching": false,
 	    "language": {
-	    	"zeroRecords": "没有预约信息"
+	    	"zeroRecords": "没有预约信息",
+	    	"emptyTable":"没有预约信息"
+	    	
 	      },
-	      "stateSave": true,
-	      "autoWidth": false,
+	      "stateSave": false,
+	      "autoWidth": true,
 	} );
 });
 </script>
 <body>
-<div class="container" >
-    <jsp:include page="../fragments/bodyHeader.jsp"/>
+
+  <jsp:include page="../fragments/bodyHeader.jsp"/>
+<div class="container">
+
     
     
     <datatables:table id="reservations" data="${selections}" row="reservation" theme="bootstrap2" 
                       cssClass="table table-striped" pageable="false" info="false" export="xls" 
                       >
        
-        <datatables:column title="预约号" property="id" cssStyle="width: 40px;" />
-        <datatables:column title="姓名" property="personName" cssStyle="width: 40px;"/>
-        <datatables:column title="身份证号" property="idCardNo" cssStyle="width: 70px;"/>
-        <datatables:column title="电子邮箱" property="email" cssStyle="width: 50px;"/>
-        <datatables:column title="手机号" property="phone" cssStyle="width: 40px;"/>
-        <datatables:column title="QQ号" property="qq" cssStyle="width: 40px;"/>
+        <datatables:column title="预约号" property="id" cssStyle="width: 15%;" />
+        <datatables:column title="姓名" property="personName" cssStyle="width: 15%;"/>
+        <datatables:column title="身份证号" property="idCardNo" cssStyle="width: 20%;"/>
+        <datatables:column title="电子邮箱" property="email" cssStyle="width: 20%;"/>
+        <datatables:column title="手机号" property="phone" cssStyle="width: 15%;"/>
+        <datatables:column title="QQ号" property="qq" cssStyle="width: 15%;"/>
             
-        <datatables:export type="xls" cssClass="btn" cssStyle="height: 20px;"/>
+        <datatables:export type="xls" cssClass="btn" cssStyle="height: 20px;" />
     </datatables:table>
     
     
@@ -64,7 +68,7 @@ $(document).ready(function() {
         <datatables:export type="pdf" cssClass="btn" cssStyle="height: 25px;" />
     </datatables:table> --%>
     
-    <jsp:include page="../fragments/footer.jsp"/>
+   <%--  <jsp:include page="../fragments/footer.jsp"/> --%>
 
 </div>
 </body>

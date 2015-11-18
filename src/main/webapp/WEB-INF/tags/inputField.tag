@@ -8,10 +8,10 @@
 
 <spring:bind path="${name}">
     <c:set var="cssGroup" value="control-group ${status.error ? 'error' : '' }"/>
-    <div class="${cssGroup}">
+    <div class="${cssGroup}" >
         <label class="control-label">${label}</label>
 
-        <div class="controls">
+        <div class="controls" style="text-align: left !important;">
             <form:input path="${name}"/>
             <span class="help-inline">${status.errorMessage}</span>
         </div>
