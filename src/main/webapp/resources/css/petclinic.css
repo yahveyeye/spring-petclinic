@@ -27,6 +27,8 @@ input[type="text"] {
 
 .form-horizontal .control-label {
     text-align: right;
+    width: 38%;
+    padding-right: 1em;
 }
 
 .divleft{ 
@@ -56,6 +58,7 @@ input[type="text"] {
    background-image: url('../images/buttonbg.png');
     width: 163px;
     height: 30px;
+    color: #FFFFFF;
 }
 
 .thal{
