@@ -53,7 +53,7 @@
         <datatables:export type="pdf" cssClass="btn" cssStyle="height: 25px;" />
     </datatables:table> --%>
     
-    <jsp:include page="../fragments/footer.jsp"/>
+   <%--  <jsp:include page="../fragments/footer.jsp"/> --%>
 
 </div>
 </body>

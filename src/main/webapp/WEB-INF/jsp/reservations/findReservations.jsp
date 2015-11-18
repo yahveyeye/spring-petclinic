@@ -46,7 +46,7 @@
   </div>
    <%--  <a href='<spring:url value="/reservations/new" htmlEscape="true"/>'>Add Owner</a> --%>
 
-    <jsp:include page="../fragments/footer.jsp"/>
+    <%-- <jsp:include page="../fragments/footer.jsp"/> --%>
 
 </div>
 </body>
