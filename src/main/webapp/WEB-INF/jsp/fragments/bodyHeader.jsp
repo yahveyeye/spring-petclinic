@@ -22,9 +22,9 @@
 		</tr>
 	</table>
 </div> -->
- <div class="navbar" style="width: 100%;">
-    <div class="navbar-inner">
-        <ul class="nav">
+ <div class="navbar" style="width: 100%; text-align: center !important;">
+    <div class="navbar-inner" style="text-align: center !important;">
+        <ul class="nav" >
             <li style="width: 120px;"><a href="<spring:url value="/" htmlEscape="true" />"><i class="icon-home"></i>
                 首页</a></li>
             <li style="width: 150px;"><a href="<spring:url value="/reservations/new" htmlEscape="true" />"><i
