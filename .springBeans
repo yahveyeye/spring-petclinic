@@ -1,15 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-	<pluginVersion><![CDATA[3.7.1.201510041102-RELEASE]]></pluginVersion>
+	<pluginVersion><![CDATA[3.7.3.201602250914-RELEASE]]></pluginVersion>
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
+		<config>java:com.zymb.gxyhxx.reservation.config.BusinessConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.DataSourceConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.InitDataSourceConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.JdbcConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.JpaConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.MvcCoreConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.MvcViewConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.RootApplicationContextConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.SharedJpaConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.SpringDataJpaConfig</config>
+		<config>java:com.zymb.gxyhxx.reservation.config.ToolsConfig</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
 	<configSets>
+		<configSet>
+			<name><![CDATA[jpa]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>java:com.zymb.gxyhxx.reservation.config.JpaConfig</config>
+			</configs>
+			<profiles>
+			</profiles>
+		</configSet>
+		<configSet>
+			<name><![CDATA[jdbc]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>java:com.zymb.gxyhxx.reservation.config.JdbcConfig</config>
+			</configs>
+			<profiles>
+			</profiles>
+		</configSet>
+		<configSet>
+			<name><![CDATA[springData]]></name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>java:com.zymb.gxyhxx.reservation.config.SpringDataJpaConfig</config>
+			</configs>
+			<profiles>
+			</profiles>
+		</configSet>
 	</configSets>
 </beansProjectDescription>
